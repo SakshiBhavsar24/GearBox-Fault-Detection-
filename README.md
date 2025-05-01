@@ -23,6 +23,7 @@ d) Frontend: A lightweight web interface built with HTML, CSS, and JavaScript al
 5) Responsive and intuitive user interface
 
 🚀 Technologies Used
+
 i) Python for data processing and model training
 
 ii) Scikit-learn for machine learning
