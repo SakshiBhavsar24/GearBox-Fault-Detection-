@@ -2,35 +2,36 @@
 Detects gearbox faults using acceleration data and a Random Forest classifier. Includes a simple web-based frontend for predictions.
 This project focuses on identifying faults in gearbox systems using machine learning techniques applied to vibration data. It leverages a Random Forest classifier to analyze acceleration signals and determine whether a gearbox is healthy or faulty.
 
-🔧 How It Works
-a) Input Data: Acceleration values in the X, Y, and Z directions from gearbox sensors.
+🔧 How It Works: 
 
-b) Preprocessing: Computes the vector sum of the acceleration components to consolidate signal strength.
+   a) Input Data: Acceleration values in the X, Y, and Z directions from gearbox sensors.
 
-c) Model: A Random Forest classifier is trained on labeled vibration data to distinguish between healthy and faulty gearbox conditions.
+   b) Preprocessing: Computes the vector sum of the acceleration components to consolidate signal strength.
 
-d) Frontend: A lightweight web interface built with HTML, CSS, and JavaScript allows users to input sensor data and receive real-time fault predictions.
+   c) Model: A Random Forest classifier is trained on labeled vibration data to distinguish between healthy and faulty gearbox conditions.
 
-📁 Features
-1) Binary classification: Healthy vs Faulty
+   d) Frontend: A lightweight web interface built with HTML, CSS, and JavaScript allows users to input sensor data and receive real-time fault predictions.
 
-2) Sensor data input (X, Y, Z acceleration)
+📁 Features : 
+   1) Binary classification: Healthy vs Faulty
 
-3) Vector sum computation for noise reduction
+   2) Sensor data input (X, Y, Z acceleration)
 
-4) Random Forest for robust classification
+   3) Vector sum computation for noise reduction
 
-5) Responsive and intuitive user interface
+   4) Random Forest for robust classification
 
-🚀 Technologies Used
+   5) Responsive and intuitive user interface
 
-i) Python for data processing and model training
+🚀 Technologies Used : 
 
-ii) Scikit-learn for machine learning
+   i) Python for data processing and model training
 
-iii) HTML/CSS/JavaScript for the frontend
+   ii) Scikit-learn for machine learning
 
-iv) Flask 
+   iii) HTML/CSS/JavaScript for the frontend
+
+   iv) Flask 
 
 📊 Use Case
-Ideal for predictive maintenance and monitoring in industrial environments where early detection of gearbox faults can prevent costly downtime and failures.
+   Ideal for predictive maintenance and monitoring in industrial environments where early detection of gearbox faults can prevent costly downtime and failures.
