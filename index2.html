@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gear Fault Predictor</title>
+    <style>
+        /* Light and Modern UI */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff, #dfe9f3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 500px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        /* Centered Input Fields */
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input {
+            width: 90%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #f3f6fb;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        input:focus {
+            background: #ffffff;
+            box-shadow: 0px 0px 10px rgba(79, 172, 254, 0.4);
+            outline: none;
+        }
+
+        /* Button Styling */
+        button {
+            width: 90%;
+            padding: 14px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #5a95ff, #3d78f0);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(90, 149, 255, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #3d78f0, #5a95ff);
+            box-shadow: 0px 5px 15px rgba(90, 149, 255, 0.5);
+        }
+
+        /* Result & Messages */
+        #loading {
+            display: none;
+            color: #3d78f0;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Gear Fault Predictor</h2>
+        <div class="input-container">
+            <input type="number" id="a1" placeholder="Enter acceleration (a1)">
+            <input type="number" id="a2" placeholder="Enter acceleration (a2)">
+            <input type="number" id="a3" placeholder="Enter acceleration (a3)">
+        </div>
+        <button onclick="predictFault()">Predict Fault</button>
+        <p id="loading">Predicting...</p>
+        <p id="error" class="error"></p>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function predictFault() {
+            const a1 = document.getElementById("a1").value.trim();
+            const a2 = document.getElementById("a2").value.trim();
+            const a3 = document.getElementById("a3").value.trim();
+            const resultDiv = document.getElementById("result");
+            const errorDiv = document.getElementById("error");
+            const loadingDiv = document.getElementById("loading");
+
+            resultDiv.innerText = "";
+            errorDiv.innerText = "";
+            
+            // Input Validation
+            if (a1 === "" || a2 === "" || a3 === "") {
+                errorDiv.innerText = "Please enter all values.";
+                return;
+            }
+
+            try {
+                loadingDiv.style.display = "block";
+
+                const response = await fetch("http://127.0.0.1:5000/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        a1: parseFloat(a1), 
+                        a2: parseFloat(a2), 
+                        a3: parseFloat(a3) 
+                    })
+                });
+
+                const data = await response.json();
+                resultDiv.innerText = "Prediction: " + data.prediction;
+            } catch (error) {
+                errorDiv.innerText = "Error predicting fault. Please try again.";
+            } finally {
+                loadingDiv.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
